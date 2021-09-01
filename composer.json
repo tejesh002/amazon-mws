@@ -1,0 +1,22 @@
+{
+    "name": "mws/amazon-mws",
+    "description": "Library to interface with Amazon MWS settlement Reports",
+    "license": "MIT",
+    "keywords": ["amazon", "mws"],
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Tejesh",
+            "email": "teju.tejesh002@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.4",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MWS\\": "src"
+        }
+    }
+}
