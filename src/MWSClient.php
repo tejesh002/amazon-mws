@@ -2,7 +2,7 @@
 namespace MWS;
 
 use Exception;
-use LetzChange\Services\AmazonPay\MWSEndPoint;
+use MWSEndPoint;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use function GuzzleHttp\json_encode;
@@ -58,22 +58,17 @@ class MWSClient{
         return json_decode(json_encode(simplexml_load_string($xmlstring)), true);
     }
 
-    public function GetReportRequestList($Reportid)
-    {
-        return $this->request('GetReportRequestList',$Reportid);
-        
-    }
-
-    public function GetReportRequestStatus($ReportId)
+    public function GetReportRequest($ReportRequestId)
     {
         $result = $this->request('GetReportRequestList', [
-            'ReportRequestIdList.Id.1' => $ReportId
+            'ReportRequestIdList.Id.1' => $ReportRequestId
         ]);
 
-        if (isset($result['GetReportRequestListResult']['ReportRequestInfo'])) {
+        if (isset($result['GetReportRequestListResult']['ReportRequestInfo']))
+        {
             return $result['GetReportRequestListResult']['ReportRequestInfo'];
         }
-        return false;
+        return $result;
     }
 
     public function GetReportListByNextToken($Token)
@@ -81,23 +76,8 @@ class MWSClient{
         return $this->request('GetReportListByNextToken',["NextToken"=>$Token]);
        
     }
-
-    public function GetReport($ReportId)
-    {
-        $status = $this->GetReportRequestStatus($ReportId);
-
-        if ($status !== false && $status['ReportProcessingStatus'] === '_DONE_NO_DATA_') {
-            return [];
-        } else if ($status !== false && $status['ReportProcessingStatus'] === '_DONE_') {
-
-            return $this->GetReportUsingReportId($status['GeneratedReportId']);
-        } else {
-            return false;
-        }
-    }
-
     
-    public function GetReportUsingReportId($ReportId)
+    public function GetReport($ReportId)
     {
         
         $result = $this->request('GetReport',[
@@ -113,7 +93,6 @@ class MWSClient{
             array_push($result,array_combine($header,$data));
         }
         return $result;
-        
     }
 
     private function request($endPoint, array $query = [], $body = null, $raw = false)
@@ -205,7 +184,7 @@ class MWSClient{
                     $error = simplexml_load_string($message);
                     $message = $error->Error->Message;
                 }
-                return $e->getResponse()->getBody();
+                $message = $e->getResponse()->getBody();
             } else {
                 $message = 'An error occured';
             }
