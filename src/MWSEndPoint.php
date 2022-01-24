@@ -29,6 +29,12 @@ class MWSEndPoint{
             'action' => 'GetReport',
             'path' => '/',
             'date' => '2009-01-01'
+        ],
+        'UpdateReportAcknowledgements'=> [
+            'method' => 'POST',
+            'action' => 'UpdateReportAcknowledgements',
+            'path' => '/',
+            'date' => '2009-01-01'
         ]
     ];
 
