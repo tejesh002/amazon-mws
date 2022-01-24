@@ -2,7 +2,7 @@
 namespace MWS;
 
 use Exception;
-use MWSEndPoint;
+use MWS\MWSEndPoint;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use function GuzzleHttp\json_encode;
