@@ -52,6 +52,16 @@ class MWSClient{
     {
         return $this->request('GetReportList', $ReportTypeList);
     }
+    
+    public function UpdateReportAcknowledgements($ReportRequestId,$acknowledge=true)
+    {
+        $result = $this->request('UpdateReportAcknowledgements',[
+            'ReportIdList.Id.1'=>$ReportRequestId,
+            'Acknowledged'=>$acknowledge
+        ]);
+
+        return $result;
+    }
 
     private function xmlToArray($xmlstring)
     {
