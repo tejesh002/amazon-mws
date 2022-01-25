@@ -16,9 +16,7 @@ composer.json
 ```
 
 ```
-<h2>
  composer require "mws/amazon-mws":"*@dev"
-</h2>
 ```
 
 ```php
@@ -33,8 +31,10 @@ $config = array(
 $client = new MWSClient($config);
 ```
 
-# GET_REPORT_LIST
+
 ```php
+# GET_REPORT_LIST
+
 $reportlist = array(
                 "MarketplaceId"=> //your marketplaceid,
                 "ReportTypeList.Type.1"=> "_GET_FLAT_FILE_OFFAMAZONPAYMENTS_SETTLEMENT_DATA_",
@@ -45,27 +45,32 @@ $reportlist = array(
 $response = $client->GetReportList($reportlist);
 
 $reportRequestId = $response['GetReportListResult']['ReportInfo']['ReportId']
+```
 
+```
 if $response['GetReportListResult']['HasNext'] = True
 
 $response = $client->GetReportListByNextToken($response["NextToken"])
-get the reportrequestid
+get the reportRequestId
 ```
-# GET REPORT REQUEST
+
 ```php
+#GET REPORT REQUEST
 $report_request_response = $client->GetReportRequest($reportRequestId);
-```
 
 $reportid = $report_request_response['GeneratedReportId']
+```
 
 
-# GET SETTLEMENT RESPONSE 
 ```php
+# GET SETTLEMENT RESPONSE 
+
 $settlement_Report = $client->GetReport($reportid)
 ```
 
-# update acknowledge 
+
 ```php
+# update acknowledge 
 $response = $client->UpdateReportAcknowledgements($reportid,$acknowledge=true)
 
  # $acknowledge = true // default if you can change the acknowledge
