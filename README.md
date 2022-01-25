@@ -14,8 +14,9 @@ composer.json
   }
 ]
 ```
- composer update
+ # composer require "mws/amazon-mws":"*@dev"
 
+```php
 $config = array(
       'Seller_Id' =>  //merchant_id,
       'Access_Key_ID' => // Accesskey,
@@ -25,7 +26,7 @@ $config = array(
       )
       
 $client = new MWSClient($config);
-
+```
 
 # GET_REPORT_LIST
 ```php
@@ -37,7 +38,6 @@ $reportlist = array(
                 "MaxCount"=>100
             );
 $response = $client->GetReportList($reportlist);
-```
 
 $reportRequestId = $response['GetReportListResult']['ReportInfo']['ReportId']
 
@@ -45,7 +45,7 @@ if $response['GetReportListResult']['HasNext'] = True
 
 $response = $client->GetReportListByNextToken($response["NextToken"])
 get the reportrequestid
-
+```
 # GET REPORT REQUEST
 ```php
 $report_request_response = $client->GetReportRequest($reportRequestId);
@@ -62,6 +62,6 @@ $settlement_Report = $client->GetReport($reportid)
 # update acknowledge 
 ```php
 $response = $client->UpdateReportAcknowledgements($reportid,$acknowledge=true)
-```
-$acknowledge = true // default if you can change the acknowledge
 
+ # $acknowledge = true // default if you can change the acknowledge
+```
