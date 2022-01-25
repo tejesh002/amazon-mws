@@ -15,9 +15,11 @@ composer.json
 ]
 ```
 
-<h3>
+```
+<h2>
  composer require "mws/amazon-mws":"*@dev"
-</h3>
+</h2>
+```
 
 ```php
 $config = array(
