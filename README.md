@@ -1,4 +1,4 @@
-Amazon Settlement Package
+# Amazon Settlement Package
 
 composer.json
 ```
@@ -14,7 +14,10 @@ composer.json
   }
 ]
 ```
- # composer require "mws/amazon-mws":"*@dev"
+
+<h3>
+ composer require "mws/amazon-mws":"*@dev"
+</h3>
 
 ```php
 $config = array(
