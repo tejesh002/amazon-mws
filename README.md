@@ -1,8 +1,7 @@
-# amazon-mws
-
+Amazon Settlement Package
 
 composer.json
-
+```
 "require": {
   ...
   "mws/amazon-mws":"*@dev"
@@ -14,8 +13,8 @@ composer.json
       "url":"https://github.com/tejesh002/amazon-mws.git"
   }
 ]
-
-RUN composer update
+```
+ composer update
 
 $config = array(
       'Seller_Id' =>  //merchant_id,
@@ -29,7 +28,7 @@ $client = new MWSClient($config);
 
 
 # GET_REPORT_LIST
-
+```php
 $reportlist = array(
                 "MarketplaceId"=> //your marketplaceid,
                 "ReportTypeList.Type.1"=> "_GET_FLAT_FILE_OFFAMAZONPAYMENTS_SETTLEMENT_DATA_",
@@ -38,6 +37,7 @@ $reportlist = array(
                 "MaxCount"=>100
             );
 $response = $client->GetReportList($reportlist);
+```
 
 $reportRequestId = $response['GetReportListResult']['ReportInfo']['ReportId']
 
@@ -47,20 +47,21 @@ $response = $client->GetReportListByNextToken($response["NextToken"])
 get the reportrequestid
 
 # GET REPORT REQUEST
+```php
 $report_request_response = $client->GetReportRequest($reportRequestId);
-
+```
 
 $reportid = $report_request_response['GeneratedReportId']
 
 
 # GET SETTLEMENT RESPONSE 
-
+```php
 $settlement_Report = $client->GetReport($reportid)
-
+```
 
 # update acknowledge 
-
+```php
 $response = $client->UpdateReportAcknowledgements($reportid,$acknowledge=true)
-
+```
 $acknowledge = true // default if you can change the acknowledge
 
