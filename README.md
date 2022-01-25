@@ -1,7 +1,9 @@
 # Amazon Settlement Package
 
-composer.json
 ```
+# composer.json
+
+
 "require": {
   ...
   "mws/amazon-mws":"*@dev"
@@ -56,6 +58,7 @@ get the reportRequestId
 
 ```php
 #GET REPORT REQUEST
+
 $report_request_response = $client->GetReportRequest($reportRequestId);
 
 $reportid = $report_request_response['GeneratedReportId']
@@ -71,6 +74,7 @@ $settlement_Report = $client->GetReport($reportid)
 
 ```php
 # update acknowledge 
+
 $response = $client->UpdateReportAcknowledgements($reportid,$acknowledge=true)
 
  # $acknowledge = true // default if you can change the acknowledge
